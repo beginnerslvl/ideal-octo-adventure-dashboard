@@ -8,25 +8,7 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
-import getUserPetName from "../../context/getUserPetName";
-
-function YourComponent() {
-  let var1 = ''; // Declare the variable to store the pet name
-
-  useEffect(() => {
-    const userIdentifier = "user@example.com"; // Replace with the actual user identifier
-    getUserPetName(userIdentifier)
-      .then((petName) => {
-        if (petName) {
-          var1 = petName; // Assign the pet name to var1
-          console.log("Pet name retrieved and assigned to var1:", var1);
-        }
-      })
-      .catch((error) => {
-        console.error("Error getting user's pet name:", error);
-      });
-  }, []);
-
+const var1 = 'random data';
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);
   const [diff, setDiff] = useState(null);
