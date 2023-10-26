@@ -1,0 +1,9 @@
+in build created db in production mode and modified rules in the above navbar to if true
+
+search add a doc in searchbar above and open "add data to firestore"
+
+in firebase.js import { getFirestore } from "firebase/firestore";' and follow according to docs and also 'export const db = getFirestore(app)'
+
+import { doc, setDoc } from "firebase/firestore";  into new.jsx and handleAdd function is declared and passed to onSubmit on the form ,refer to docs, also import db from firebase.js
+
+also set up firestore storage and modify rules to true and use docs for firestore storage and export storage variable after setting it up in firebase.js also see upload files section
