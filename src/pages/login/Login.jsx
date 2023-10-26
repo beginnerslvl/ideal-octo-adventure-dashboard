@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
 import "./login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase"; // Make sure to import db from Firebase
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { collection, addDoc } from "firebase/firestore"; // Import Firestore functions
+import { collection, addDoc } from "firebase/firestore";
 
 const Login = () => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState(""); // Add nickname state
-  const [petName, setPetName] = useState(""); // Add pet name state
+  const [nickname, setNickname] = useState("");
+  const [petName, setPetName] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,6 +27,9 @@ const Login = () => {
       // Save the user profile data to Firestore
       await addUserProfile(user.uid, nickname, petName);
 
+      // Log the user's nickname and pet name
+      console.log(`Nickname: ${nickname}, Pet Name: ${petName}`);
+
       dispatch({ type: "LOGIN", payload: user });
       navigate("/");
     } catch (error) {
@@ -34,9 +37,8 @@ const Login = () => {
     }
   };
 
-  // Function to add user profile data to Firestore
   const addUserProfile = async (uid, nickname, petName) => {
-    // Reference the 'userProfiles' collection (assuming this is the collection name)
+    // Reference the 'userProfiles' collection
     const userProfilesRef = collection(db, "userProfiles");
 
     try {
@@ -44,8 +46,8 @@ const Login = () => {
       await addDoc(userProfilesRef, {
         uid,
         email,
-        nickname,
-        petName,
+        nickname, // Add nickname to Firestore
+        petName, // Add pet name to Firestore
       });
     } catch (error) {
       console.error("Error adding user profile: ", error);
@@ -66,12 +68,12 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          type="email"
+          type="text" // Change this to text for nickname
           placeholder="Nickname"
           onChange={(e) => setNickname(e.target.value)}
         />
         <input
-          type="password"
+          type="text" // Change this to text for pet name
           placeholder="Pet Name"
           onChange={(e) => setPetName(e.target.value)}
         />
