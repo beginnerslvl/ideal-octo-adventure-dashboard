@@ -8,6 +8,29 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
+
+// Function to fetch user profiles from Firestore
+export async function getAllUserProfiles() {
+  const userProfilesRef = collection(db, "userProfiles");
+
+  try {
+    const querySnapshot = await getDocs(userProfilesRef);
+
+    const userProfiles = [];
+
+    querySnapshot.forEach((doc) => {
+      const userProfile = doc.data();
+      userProfiles.push(userProfile);
+    });
+
+    return userProfiles;
+  } catch (error) {
+    console.error("Error fetching user profiles: ", error);
+    return [];
+  }
+}
+
+
 const var1 = 'random data';
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);
