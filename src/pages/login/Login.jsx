@@ -4,7 +4,35 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase"; // Make sure to import db from Firebase
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { collection, addDoc } from "firebase/firestore";
+import { db, collection, query, where, getDocs } from "firebase/firestore";
+
+const fetchAndLogPetName = async (email) => {
+  const userProfilesRef = collection(db, "userProfiles");
+  const q = query(userProfilesRef, where("email", "==", email));
+
+  try {
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.log("No matching documents.");
+      return null;
+    }
+
+    const userProfile = querySnapshot.docs[0].data();
+    const petName = userProfile.petName;
+
+    console.log(`Pet Name: ${petName}`);
+    return petName;
+  } catch (error) {
+    console.error("Error fetching pet name: ", error);
+    return null;
+  }
+};
+
+// Example usage:
+const emailToSearch = "ajmalwaleed107@gmail.com"; // Replace with the email you want to search
+fetchAndLogPetName(emailToSearch);
+
 
 const Login = () => {
   const [error, setError] = useState(false);
