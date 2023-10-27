@@ -11,12 +11,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: "realmadmin-a944f.firebaseapp.com",
-  projectId: "realmadmin-a944f",
-  storageBucket: "realmadmin-a944f.appspot.com",
-  messagingSenderId: "940217221835",
-  appId: "1:940217221835:web:a9e701e722108e14a0d14e"
+  apiKey: "AIzaSyC6STSLhMEFF0xBI6boMrbmCh0jW1S_6yQ",
+  authDomain: "waleed-5bf05.firebaseapp.com",
+  projectId: "waleed-5bf05",
+  storageBucket: "waleed-5bf05.appspot.com",
+  messagingSenderId: "302867618364",
+  appId: "1:302867618364:web:f35a84e494f0da8cde4139",
+  measurementId: "G-J7RJPPMXSH"
 };
 
 // Initialize Firebase
